@@ -27,6 +27,8 @@ Variables
 * `ACCEPTED_NETWORKS=192.168.0.0/16 172.16.0.0/12 10.0.0.0/8`: A network (or a list of networks) to accept mail from
 * `EXT_RELAY_HOST=email-smtp.us-east-1.amazonaws.com`: External relay DNS name
 * `EXT_RELAY_PORT=25`: External relay TCP port
+* `SMTP_AUTHLOGIN=`: Login for authentication to the SMTP relay
+* `SMTP_AUTHPASSWORD=`: Password for authentication to the SMTP relay
 * `SMTP_LOGIN=`: Login to connect to the external relay (required, otherwise the container fails to start)
 * `SMTP_PASSWORD=`: Password to connect to the external relay (required, otherwise the container fails to start)
 * `USE_TLS=`: Remote require tls. Might be "yes" or "no". Default: no.

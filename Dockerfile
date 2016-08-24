@@ -2,7 +2,7 @@ FROM alpine:latest
 MAINTAINER Geoffrey Hughes <geoffrey.hughes@otago.ac.nz>
 
 # Packages: update
-RUN apk -U add postfix ca-certificates libsasl py-pip supervisor rsyslog
+RUN apk -U add postfix ca-certificates libsasl py-pip supervisor rsyslog cyrus-sasl openssl
 RUN pip install j2cli
 
 # Add files

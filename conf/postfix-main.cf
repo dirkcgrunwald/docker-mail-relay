@@ -11,20 +11,28 @@ readme_directory = no
 
 # TLS parameters
 smtp_sasl_auth_enable = yes
-smtp_sasl_security_options = noanonymous
+smtp_sasl_security_options = noanonymous,noplaintext
+smtp_sasl_tls_security_options = noanonymous
 smtp_sasl_password_maps = hash:/etc/postfix/sasl_passwd
 smtp_use_tls = {{ USE_TLS }}
 smtp_tls_security_level = {{ TLS_VERIFY }}
 smtp_tls_note_starttls_offer = yes
 smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
 
+smtpd_tls_auth_only=yes
+
 smtpd_tls_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
 smtpd_tls_key_file=/etc/ssl/private/ssl-cert-snakeoil.key
 smtpd_use_tls=yes
 smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
+smtp_tls_note_starttls_offer = yes      
+
 
 # See /usr/share/doc/postfix/TLS_README.gz in the postfix-doc package for
 # information on enabling SSL in the smtp client.
+
+
+smtpd_client_restrictions = permit_sasl_authenticated
 
 smtpd_relay_restrictions = permit_mynetworks permit_sasl_authenticated defer_unauth_destination
 myhostname = {{ RELAY_HOST_NAME }}
