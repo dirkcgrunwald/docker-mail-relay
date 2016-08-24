@@ -1,5 +1,5 @@
 FROM alpine:latest
-MAINTAINER Geoffrey Hughes <geoffrey.hughes@otago.ac.nz>
+MAINTAINER Dirk Grunwald <grunwald@cs.colorado.edu>
 
 # Packages: update
 RUN apk -U add postfix ca-certificates libsasl py-pip supervisor rsyslog cyrus-sasl openssl
@@ -20,5 +20,7 @@ RUN chmod +x /root/run.sh
 
 # Declare
 EXPOSE 25
+EXPOSE 465
+EXPOSE 587
 
 CMD ["/root/run.sh"]

@@ -1,0 +1,33 @@
+#!/bin/sh
+
+#
+# Sample script to run the smtp-relay
+# To send mail, you connect to e.g. port 258
+# and authentication with user 'test@domain' and password 'testpass'
+#
+# Mail is related to smtp.network.com using name 'smtplogin'
+# and password 'smtppasswd'
+#
+# You need to provide your own SSl certificate, but snakeoil shoudl work
+#
+
+docker run --rm -it \
+       --name smtp-relay \
+       -e RELAY_HOST_NAME='name.of.your.system' \
+       -e ACCEPTED_NETWORKS='0.0.0.0/0' \
+       -e EXT_RELAY_HOST='smtp.network.com' \
+       -e EXT_RELAY_PORT=587 \
+       -e SMTP_AUTHLOGIN='test' \
+       -e SMTP_AUTHDOM='domain' \
+       -e SMTP_AUTHPASSWORD='testpass' \
+       -e SMTP_LOGIN='smtplogin' \
+       -e SMTP_PASSWORD='smtppasswd' \
+       -e USE_TLS='yes' \
+       -e TLS_VERIFY='secure' \
+       -e SSL_CERT_PEM="$(cat your.crt)" \
+       -e SSL_CERT_KEY="$(cat your.key)" \
+       -p 2025:25 \
+       -p 2465:465 \
+       -p 2587:587 \
+       smtp-relay $*
+       
